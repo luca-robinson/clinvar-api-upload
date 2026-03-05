@@ -179,14 +179,14 @@ def submit_variants(variants_list, variant_type, variant_status, haplo = False):
                 output_file.write(data)
             report_json = f'temp/{sub_id}-summary-report.json {"variants" if not haplo else "haplotypes"}'
             summaries_list.append(report_json)
-        file_path = f'temp/{variant_type}_summaries_list_{variant_status}.txt'
-        with open(file_path, mode = 'a' if os.path.exists(file_path) else 'w') as summaries_file:
-            #writes file with summary jsons path to be used for annotation
-            for json_file in summaries_list:
-                summaries_file.write(json_file)
-                summaries_file.write("\n")
-        print("[INFO]: Variant submission to ClinVar API completed!")
-        print("------IMPORTANT! Remember to annotate the data after successful upload------ \n \n")
+    file_path = f'temp/{variant_type}_summaries_list_{variant_status}.txt'
+    with open(file_path, mode = 'a' if os.path.exists(file_path) else 'w') as summaries_file:
+        #writes file with summary jsons path to be used for annotation
+        for json_file in summaries_list:
+            summaries_file.write(json_file)
+            summaries_file.write("\n")
+    print("[INFO]: Variant submission to ClinVar API completed!")
+    print("------IMPORTANT! Remember to annotate the data after successful upload------ \n \n")
 
 # ----------main execution-------------------
 if __name__ == "__main__":
