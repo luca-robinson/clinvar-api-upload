@@ -194,6 +194,9 @@ def convert_variant(variants_entries, date_of_upload, somatic_flag, to_update=Fa
     variants_list = []
     for variant in variants_entries:
         variant["Classification"] = variant["Classification"].capitalize()
+        if variant["Classification"] == "Unclassified": # do not upload unclassified variants
+            print(variant)
+            continue
         if variant["Classification"] == "Unknown significance":
             variant["Classification"] = "Uncertain significance"  # ClinVar requirement
         if somatic_flag:
