@@ -286,7 +286,12 @@ if __name__ == "__main__":
             submit_variants(variants_list, variant_type, variant_status="novel")
             print(f"[INFO]: Looking at haplotypes...")
             if haplotypes_input:
-                haplotypes_upload_formatted = helper_functions.convert_variant(haplotypes_input, date_of_extraction, to_update= False,
+                with open(haplotypes_input, encoding="utf-8", mode="r") as tsv:
+                    csv_reader = csv.DictReader(tsv, delimiter="\t")
+                    haplo_entries = []
+                    for haplo in csv_reader:
+                        haplo_entries.append(haplo)
+                haplotypes_upload_formatted = helper_functions.convert_variant(haplo_entries, date_of_extraction, to_update= False,
                                                                                  somatic_flag = (True if variant_type == "somatic" else False))
                 submit_variants(haplotypes_upload_formatted, variant_type, variant_status="novel", haplo = True)
             else:
