@@ -2,7 +2,7 @@ import copy
 import csv
 from datetime import date
 import os
-from re import sub
+import re
 
 BASE_PAIRS = {"A": "T", "C": "G", "G": "C", "T": "A"}
 SUB_URL = "https://submit.ncbi.nlm.nih.gov/api/v1/submissions"
@@ -102,13 +102,12 @@ def fix_hgvs(hgvs, alt):
     if "(" in hgvs:
         values = hgvs.split(",")
         if len(values) == 2:
-            value1 = sub("[\(].*?[\)]", get_reverse_strand(alt), values[0])
+            value1 = re.sub(r"\(.*?\)", get_reverse_strand(alt), values[0])
             modified_hgvs.append(value1)
-            value2 = sub("[\(].*?[\)]", alt, values[1])
+            value2 = re.sub(r"\(.*?\)", alt, values[1])
             modified_hgvs.append(value2)
         else:
-            modified_hgvs.append(sub("[\(].*?[\)]", get_reverse_strand(alt), values[0]))
-        #print(f'Old hgvs c.: {hgvs} \n New hgvs c.: {",".join(modified_hgvs)}')
+            modified_hgvs.append(re.sub(r"\(.*?\)", get_reverse_strand(alt), values[0]))
     return ",".join(modified_hgvs)
 
 
