@@ -6,7 +6,7 @@ import re
 
 BASE_PAIRS = {"A": "T", "C": "G", "G": "C", "T": "A"}
 SUB_URL = "https://submit.ncbi.nlm.nih.gov/api/v1/submissions"
-TEST_URL = "https://submit.ncbi.nlm.nih.gov/apitest/v1/submissions"
+TEST_URL = "https://submit.ncbi.nlm.nih.gov/api/v1/submissions/?dry-run=true"
 
 SOMATIC_CLASSIFICATION_MAPPING = {"Pathogenic": "Oncogenic", "Likely pathogenic": "Likely oncogenic", "Uncertain significance": "Uncertain significance", "Likely benign":"Likely benign", "Benign": "Benign"}
 
